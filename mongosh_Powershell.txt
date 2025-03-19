@@ -1,0 +1,141 @@
+mongosh mongodb+srv://tlilizohra12:Zohra!10828083@cluster0.vxfku.mongodb.net/
+Current Mongosh Log ID: 67c8070fdb3b1a7a38fa4213
+Connecting to:          mongodb+srv://<credentials>@cluster0.vxfku.mongodb.net/?appName=mongosh+2.4.0
+Using MongoDB:          8.0.5
+Using Mongosh:          2.4.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+Atlas atlas-hpncsj-shard-0 [primary] test> use library_db
+Atlas atlas-hpncsj-shard-0 [primary] test> db.books.find()
+[  
+  {
+    _id: ObjectId('67c5947dbc726031f2497af1'),
+    title: 'The Adventures of Sherlock Holmes',
+    author: 'Arthur Conan Doyle',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af3'),
+    title: 'Nemesis',
+    author: 'Agatha Christie',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af4'),
+    title: 'The Green Mile',
+    author: 'Stephen King',
+    available: false
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af5'),
+    title: 'Macbeth',
+    author: 'William Shakespeare',
+    available: false
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af6'),
+    title: 'Treasure Island',
+    author: 'Robert Louis Stevenson',
+    available: true
+  }
+]
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.deleteOne({available: false})
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.find()
+[  
+  {
+    _id: ObjectId('67c5947dbc726031f2497af1'),
+    title: 'The Adventures of Sherlock Holmes',
+    author: 'Arthur Conan Doyle',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af3'),
+    title: 'Nemesis',
+    author: 'Agatha Christie',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af5'),
+    title: 'Macbeth',
+    author: 'William Shakespeare',
+    available: false
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af6'),
+    title: 'Treasure Island',
+    author: 'Robert Louis Stevenson',
+    available: true
+  }
+]
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.find({available: true})
+[  
+  {
+    _id: ObjectId('67c5947dbc726031f2497af1'),
+    title: 'The Adventures of Sherlock Holmes',
+    author: 'Arthur Conan Doyle',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af3'),
+    title: 'Nemesis',
+    author: 'Agatha Christie',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af6'),
+    title: 'Treasure Island',
+    author: 'Robert Louis Stevenson',
+    available: true
+  }
+]
+// autre version
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.updateOne({title: 'Macbeth'},{$set:{available: true}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.find()
+[  
+  {
+    _id: ObjectId('67c5947dbc726031f2497af1'),
+    title: 'The Adventures of Sherlock Holmes',
+    author: 'Arthur Conan Doyle',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af3'),
+    title: 'Nemesis',
+    author: 'Agatha Christie',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af5'),
+    title: 'Macbeth',
+    author: 'William Shakespeare',
+    available: true
+  },
+  {
+    _id: ObjectId('67c5947dbc726031f2497af6'),
+    title: 'Treasure Island',
+    author: 'Robert Louis Stevenson',
+    available: true
+  }
+]
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.updateOne({title: 'Macbeth'},{$set:{available: false}})
+//return false title : 'Macbeth'
+
+//insertMany : deletedone and other deleton other book i inser here
+Atlas atlas-hpncsj-shard-0 [primary] library_db> db.books.insertMany([{ "title": "The A B C Murders", "author": "Agatha Christie", "available": false },{ 
+"title": "The Green Mile", "author": "Stephen King", "available": false }])  
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('67c80928db3b1a7a38fa4214'),
+    '1': ObjectId('67c80928db3b1a7a38fa4215')
+  }
+}
